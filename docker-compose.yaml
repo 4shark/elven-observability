@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($|/)'
+    restart: unless-stopped
+
+  keycloak-exporter:
+    image: quay.io/bisnode/keycloak-prometheus-exporter:latest
+    container_name: keycloak-exporter
+    environment:
+      KEYCLOAK_BASE_URL: "http://<your-keycloak-url>:8080"
+      KEYCLOAK_CLIENT_ID: "<your-client-id>"
+      KEYCLOAK_CLIENT_SECRET: "<your-client-secret>"
+      KEYCLOAK_REALM: "<your-realm>"
+    ports:
+      - "8081:8080"
+    restart: unless-stopped
+
+  promtail:
+    image: grafana/promtail:latest
+    container_name: promtail
+    volumes:
+      - /var/log:/var/log
+      - /etc/promtail:/etc/promtail
+    command:
+      - "-config.file=/etc/promtail/promtail-config.yaml"
+    restart: unless-stopped
