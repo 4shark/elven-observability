@@ -14,11 +14,11 @@ receivers:
         - job_name: "keycloak-exporter"
           static_configs:
             - targets:
-                - "localhost:8081"
+                - "localhost:9000"
           metrics_path: /metrics
           relabel_configs:
             - source_labels: [__address__]
-              regex: "(.*):8081"
+              regex: "(.*):9000"
               target_label: instance
               replacement: "keycloak"
 
