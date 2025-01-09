@@ -9,7 +9,7 @@ clients:
   - url: "https://loki.elvenobservability.com/loki/api/v1/push"
     headers:
       X-Scope-OrgID: "4shark"
-      Authorization: "Bearer "     
+      Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJlbHZlbi1sZ3RtLWp3dCIsInN1YiI6IjEyMzQ1Njc4OTAiLCJuYW1lIjoiRWx2ZW4gTEdUTSIsImFkbWluIjp0cnVlLCJpYXQiOjE3MzY0Mjc0MTl9.lM5Qc402JD0DJAvZaVSPPAUoV2rbO2efQsFGNjwZtCo"
 
 scrape_configs:
   - job_name: system
