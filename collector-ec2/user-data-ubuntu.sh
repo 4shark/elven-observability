@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Update packages and install Docker
-sudo apt-get update -y
-sudo apt-get install docker.io -y
-
-# Add the ubuntu user to the docker group
-sudo usermod -aG docker $USER
-
-# Create the otel-config.yaml file
 cat <<EOF > /home/ubuntu/otel-config.yaml
 receivers:
   otlp:
